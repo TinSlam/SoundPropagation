@@ -488,6 +488,187 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &1073247226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1073247227}
+  - component: {fileID: 1073247228}
+  m_Layer: 0
+  m_Name: Properties
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1073247227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073247226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1758915545}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1073247228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073247226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59fabf7aeb5d704182feab6e417c228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelProperties:
+    soundModelMethod:
+      value: 0
+    maxVolume:
+      value: 1
+    amplitude:
+      value: 20
+    decayingFactor:
+      value: 1
+    transferFunctionMethod:
+      value: 0
+    diffraction:
+      value: 1
+    decayingDiffraction:
+      value: 0
+    diffractionStaticCaching:
+      value: 0
+    diffractionGreedySearch:
+      value: 1
+    diffractionRemoveRedundantCorners:
+      value: 1
+    diffractionMapPartitioning:
+      value: 1
+    transmission:
+      value: 1
+    transmissionRayCount:
+      value: 36
+    reflection:
+      value: 1
+    reflectionRayCount:
+      value: 24
+    reflectionBounceLimit:
+      value: 3
+    reflectionMinimumRangeLimit:
+      value: 0
+    reflectionDistanceDelayFactor:
+      value: 0
+  audioProperties:
+    audioClip:
+      value: {fileID: 8300000, guid: 199887ef33bef3940853188c838975ea, type: 3}
+    outputChannels:
+      value: 0
+    volumeBasedStereo:
+      value: 0
+    audioStartDelay:
+      value: 0
+    reflectionAudioPoolCount:
+      value: 4
+    reflectionMaximumAudioDelay:
+      value: 0
+  debugProperties:
+    visualize:
+      value: 1
+    visualizeSourcePosition:
+      value: 1
+    visualizeBeacon:
+      value: 1
+    visualizeRangeCircle:
+      value: 1
+    visualizePrimarySource:
+      value: 1
+    visualizeDiffraction:
+      value: 1
+    visualizeTransmission:
+      value: 1
+    visualizeAllSoundDirections:
+      value: 0
+    visualizeWeightedSoundDirection:
+      value: 0
+    updateEachFrame:
+      value: 0
+    useGlobalTransmissionRatio:
+      value: 1
+    globalTransmissionRatio:
+      value: 0.5
+    useGlobalReflectionRatio:
+      value: 1
+    globalReflectionRatio:
+      value: 0.5
+    pointPoolSize:
+      value: 100
+    linePoolSize:
+      value: 100
+    circlePoolSize:
+      value: 100
+    soundMeshPoolSize:
+      value: 100
+--- !u!1 &1758915544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758915545}
+  - component: {fileID: 1758915546}
+  m_Layer: 0
+  m_Name: SoundSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1758915545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758915544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1073247227}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1758915546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758915544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32abf67a2082fda418c1d76f3d7d181f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  managerObject: {fileID: 1929367759}
+  propertiesObject: {fileID: 1073247226}
+  properties: {fileID: 0}
+  listenerDirection:
+    x: 0
+    y: 0
+  manager: {fileID: 0}
 --- !u!1 &1858856805
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +748,7 @@ MonoBehaviour:
   activeGeometry: {fileID: 0}
   geometryProperties:
     renderMode3D:
-      value: 1
+      value: 0
     visualizeGeometry:
       value: 1
     create3DColliders:
@@ -578,6 +759,20 @@ MonoBehaviour:
       value: []
     mapPartitionSize:
       value: 5
+  debugProperties:
+    mouseFollow2D:
+      value: 0
+    cameraTranslationSpeed:
+      value: 60
+    pointPoolSize:
+      value: 100
+    linePoolSize:
+      value: 100
+    circlePoolSize:
+      value: 100
+  fpsController: {fileID: 0}
+  debugSoundModel: {fileID: 0}
+  soundSources: []
 --- !u!1001 &2031386971
 PrefabInstance:
   m_ObjectHideFlags: 0

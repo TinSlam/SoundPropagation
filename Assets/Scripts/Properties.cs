@@ -31,9 +31,9 @@ namespace SoundPropagation{
     [System.Serializable] public class PropertyVector2: Property<Vector2>{}
     [System.Serializable] public class PropertyString: Property<string>{}
     [System.Serializable] public class PropertyAudioClip: Property<AudioClip>{}
-    //[System.Serializable] public class PropertySoundModelMethodEnum: Property<SoundModelMethod.Method>{}
-    //[System.Serializable] public class PropertyTransferFunctionEnum: Property<SoundSourceBase.TransferFunctionMethod>{}
-    //[System.Serializable] public class PropertyOutputChannelsEnum: Property<AudioManager.OutputChannels>{}
+    [System.Serializable] public class PropertySoundModelMethodEnum: Property<SoundModelMethod.Method> { }
+    [System.Serializable] public class PropertyTransferFunctionEnum: Property<SoundSourceBase.TransferFunctionMethod> { }
+    [System.Serializable] public class PropertyOutputChannelsEnum: Property<AudioManager.OutputChannels> { }
 
     public abstract class Properties{
         private GenericProperty[] properties;

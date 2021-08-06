@@ -5,30 +5,34 @@ using UnityStandardAssets.Characters.FirstPerson;
 namespace SoundPropagation{
     public partial class Manager: MonoBehaviour{
         public Geometry.Properties geometryProperties;
-        //public Debugger.Properties debugProperties;
+        public Debugger.Properties debugProperties;
         //public TestScenario.Properties testProperties;
 
         private GameObject camera2DObject;
-        private GameObject fpsController;
+        [HideInInspector] public GameObject fpsController;
+        public GameObject debugSoundModel;
+
+        public Debugger debugger;
+        //private UI ui;
+
+        [HideInInspector] public List<SoundModel> soundSources = new List<SoundModel>();
 
         private void Awake(){
             loadPrefabs();
             loadGeometry();
 
             geometryProperties.initialize();
-            //debugProperties.initialize();
+            debugProperties.initialize();
             //testProperties.initialize();
 
             ResourceManager.initializeResources();
 
-            //debugger = new Debugger(this);
-
-            //sceneDataObject.GetComponent<SceneData>().initialize();
+            debugger = new Debugger(this);
 
             initialize2D();
 
             updateGeometry();
-            
+
             //TestScenario.createScenarios(this);
         }
 
@@ -60,6 +64,49 @@ namespace SoundPropagation{
             
             Utils.camera2D.orthographic = true;
             Utils.camera2D.orthographicSize = Mathf.Max(activeGeometry.width * Screen.height / Screen.width, activeGeometry.height) / 2 + 1;
+        }
+
+        public void addSoundSource(SoundModel source){
+            soundSources.Add(source);
+        }
+
+        public void removeSoundSource(SoundModel source){
+            soundSources.Remove(source);
+        }
+
+        public void Start(){
+            updateDebugModel();
+        }
+
+        private void updateDebugModel(){
+            if(debugSoundModel == null){
+                if(soundSources.Count != 0)
+                    debugger.soundModel = soundSources[0];
+            }else
+                debugger.soundModel = debugSoundModel.GetComponent<SoundModel>();
+            
+            if(debugger.soundModel != null)
+                debugSoundModel = debugger.soundModel.gameObject;
+        }
+
+        private void Update(){
+            updateDebugModel();
+
+            debugger.update();
+            //if(debugger.soundModel != null)
+            //    updateUI();
+
+            if(!geometryProperties.isChanged())
+                return;
+
+            if(geometryProperties.activeGeometryIndex.value >= geometries.Count || geometryProperties.activeGeometryIndex.value < 0){
+                Debug.Log("Geometry index out of bounds! No change made.");
+                return;
+            }
+
+            setGeometry(geometries[geometryProperties.activeGeometryIndex.value]);
+
+            updateGeometry();
         }
     }
 }

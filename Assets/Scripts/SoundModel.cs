@@ -6,191 +6,187 @@ namespace SoundPropagation{
         public GameObject propertiesObject;
 
         public PrimarySoundSource source;
-        //public AudioManager audioManager;
-        //[HideInInspector] public SoundProperties properties;
+        public AudioManager audioManager;
+        [HideInInspector] public SoundProperties properties;
 
-        //private GameObject listenerObject;
-        //[HideInInspector] public Vector2 listenerDirection;
+        private GameObject listenerObject;
+        [HideInInspector] public Vector2 listenerDirection;
 
-        //[HideInInspector] public Manager manager;
-        //public SoundModelDebugger debugger;
+        [HideInInspector] public Manager manager;
+        public SoundModelDebugger debugger;
 
-        //private GameObject rangeCircle;
-        //private GameObject pointObject;
-        //private GameObject beaconObject;
+        private GameObject rangeCircle;
+        private GameObject pointObject;
+        private GameObject beaconObject;
 
-        //protected Vector3 oldPosition;
+        protected Vector3 oldPosition;
 
-        //public StopWatch totalModelComputationTime = new StopWatch();
-        //public StopWatch totalSoundComputationTime = new StopWatch();
-        //public Profiler.ProfilingUnit averageModelComputationTime = new Profiler.ProfilingUnit(10);
-        //public Profiler.ProfilingUnit averageSoundComputationTime = new Profiler.ProfilingUnit(10);
-        //public Profiler.ProfilingUnit averageDiffractionSoundComputationTime = new Profiler.ProfilingUnit(10);
-        //public Profiler.ProfilingUnit averageReflectionSoundComputationTime = new Profiler.ProfilingUnit(10);
-        //public Profiler.ProfilingUnit averageTransmissionSoundComputationTime = new Profiler.ProfilingUnit(10);
+        public StopWatch totalModelComputationTime = new StopWatch();
+        public StopWatch totalSoundComputationTime = new StopWatch();
+        public Profiler.ProfilingUnit averageModelComputationTime = new Profiler.ProfilingUnit(10);
+        public Profiler.ProfilingUnit averageSoundComputationTime = new Profiler.ProfilingUnit(10);
+        public Profiler.ProfilingUnit averageDiffractionSoundComputationTime = new Profiler.ProfilingUnit(10);
+        public Profiler.ProfilingUnit averageReflectionSoundComputationTime = new Profiler.ProfilingUnit(10);
+        public Profiler.ProfilingUnit averageTransmissionSoundComputationTime = new Profiler.ProfilingUnit(10);
 
-        //private bool transitioning = false;
-        //private bool transitionFirst = false;
-        //private float transitionTime = 0.5f;
-        //private float transitionInitialTime;
-        //private float tempVolume;
+        private bool transitioning = false;
+        private bool transitionFirst = false;
+        private float transitionTime = 0.5f;
+        private float transitionInitialTime;
+        private float tempVolume;
 
-        //private void OnEnable(){
-        //    transitioning = true;
-        //    transitionFirst = true;
-        //    transitionInitialTime = Time.realtimeSinceStartup;
-        //}
+        private void OnEnable() {
+            transitioning = true;
+            transitionFirst = true;
+            transitionInitialTime = Time.realtimeSinceStartup;
+        }
 
-        //private void OnDisable(){
-        //    if(properties != null && properties.modelProperties != null)
-        //        properties.modelProperties.maxVolume.value = tempVolume;
-        //}
+        private void OnDisable() {
+            if(properties != null && properties.modelProperties != null)
+                properties.modelProperties.maxVolume.value = tempVolume;
+        }
 
-        //private bool initialized = false;
+        private bool initialized = false;
 
-        //private void Start(){
-        //    init();
-        //}
+        private void Start() {
+            init();
+        }
 
-        //public void init(){
-        //    if(initialized)
-        //        return;
+        public void init() {
+            if(initialized)
+                return;
 
-        //    initialized = true;
+            initialized = true;
 
-        //    oldPosition = propertiesObject.transform.position;
+            oldPosition = propertiesObject.transform.position;
 
-        //    properties = propertiesObject.GetComponent<SoundProperties>();
-        //    properties.initialize();
+            properties = propertiesObject.GetComponent<SoundProperties>();
+            properties.initialize();
 
-        //    manager = managerObject.GetComponent<Manager>();
-        //    manager.addSoundSource(this);
+            manager = managerObject.GetComponent<Manager>();
+            manager.addSoundSource(this);
 
-        //    listenerObject = manager.fpsController.transform.GetChild(0).gameObject;
-            
-        //    debugger = new SoundModelDebugger(this);
+            listenerObject = manager.fpsController.transform.GetChild(0).gameObject;
 
-        //    source = new StaticSource(this);
-            
-        //    audioManager = new AudioManager(this, gameObject);
-        //    audioManager.playLoop();
+            debugger = new SoundModelDebugger(this);
 
-        //    pointObject = Instantiate(ResourceManager.pointPrefab);
-        //    pointObject.name = "Source";
-        //    pointObject.transform.parent = transform;
+            source = new StaticSource(this);
 
-        //    rangeCircle = Instantiate(ResourceManager.circlePrefab);
-        //    rangeCircle.name = "RangeCircle";
-        //    rangeCircle.transform.parent = transform;
+            audioManager = new AudioManager(this, gameObject);
+            audioManager.playLoop();
 
-        //    createBeaconObject();
+            pointObject = Instantiate(ResourceManager.pointPrefab);
+            pointObject.name = "Source";
+            pointObject.transform.parent = transform;
 
-        //    updateModel();
-        //}
+            rangeCircle = Instantiate(ResourceManager.circlePrefab);
+            rangeCircle.name = "RangeCircle";
+            rangeCircle.transform.parent = transform;
 
-        //private void transition(){
-        //    if(!transitioning)
-        //        return;
+            createBeaconObject();
 
-        //    if(transitionFirst){
-        //        tempVolume = properties.modelProperties.maxVolume.value;
-        //        transitionFirst = false;
-        //    }
+            updateModel();
+        }
 
-        //    float elapsedTime = Time.realtimeSinceStartup - transitionInitialTime;
-        //    if(elapsedTime >= transitionTime){
-        //        transitioning = false;
-        //        properties.modelProperties.maxVolume.value = tempVolume;
-        //    }else
-        //        properties.modelProperties.maxVolume.value = Mathf.Lerp(0, tempVolume, elapsedTime / transitionTime);
-        //}
+        private void transition() {
+            if(!transitioning)
+                return;
 
-        //private int countVertices(Obstacle.ObstacleDepth node){
-        //    int count = 0;
+            if(transitionFirst) {
+                tempVolume = properties.modelProperties.maxVolume.value;
+                transitionFirst = false;
+            }
 
-        //    foreach(Obstacle.Vertex vertex in node.obstacle.vertices)
-        //        if(Vector2.getDistance(vertex.position, source.position) < source.amplitude)
-        //            count++;
+            float elapsedTime = Time.realtimeSinceStartup - transitionInitialTime;
+            if(elapsedTime >= transitionTime) {
+                transitioning = false;
+                properties.modelProperties.maxVolume.value = tempVolume;
+            } else
+                properties.modelProperties.maxVolume.value = Mathf.Lerp(0, tempVolume, elapsedTime / transitionTime);
+        }
 
-        //    foreach(Obstacle.ObstacleDepth child in node.children)
-        //        count += countVertices(child);
+        private int countVertices(Obstacle.ObstacleTreeNode node) {
+            int count = 0;
 
-        //    return count;
-        //}
+            foreach(Obstacle.Vertex vertex in node.obstacle.vertices)
+                if(Vector2.getDistance(vertex.position, source.position) < source.amplitude)
+                    count++;
 
-        //private void countVertices(){
-        //    int count = 0;
-        //    foreach(Obstacle.ObstacleDepth node in manager.activeGeometry.obstacleTree)
-        //        count += countVertices(node);
+            foreach(Obstacle.ObstacleTreeNode child in node.children)
+                count += countVertices(child);
 
-        //    Debug.Log("Affected Vertices: " + count);
-        //}
+            return count;
+        }
 
-        //private void Update(){
-        //    transition();
+        private void countVertices() {
+            int count = 0;
+            foreach(Obstacle.ObstacleTreeNode node in manager.activeGeometry.obstacleTree)
+                count += countVertices(node);
 
-        //    if(Input.GetKeyDown(KeyCode.K))
-        //        countVertices();
+            Debug.Log("Affected Vertices: " + count);
+        }
 
-        //    rangeCircle.SetActive(properties.debugProperties.visualize.value && properties.debugProperties.visualizeRangeCircle.value);
-        //    beaconObject.SetActive(properties.debugProperties.visualize.value && manager.geometryProperties.renderMode3D.value && properties.debugProperties.visualizeBeacon.value);
-        //    pointObject.SetActive(properties.debugProperties.visualize.value && properties.debugProperties.visualizeSourcePosition.value);
+        private void Update() {
+            transition();
 
-        //    Timer soundComputationTimer = new Timer();
-        //    totalSoundComputationTime.resume();
-        //    soundComputationTimer.start();
-            
-        //    computeSound();
-            
-        //    soundComputationTimer.stop();
-        //    totalSoundComputationTime.pause();
+            if(Input.GetKeyDown(KeyCode.K))
+                countVertices();
 
-        //    averageSoundComputationTime.addNewValue(soundComputationTimer.getTimeElapsed());
+            rangeCircle.SetActive(properties.debugProperties.visualize.value && properties.debugProperties.visualizeRangeCircle.value);
+            beaconObject.SetActive(properties.debugProperties.visualize.value && manager.geometryProperties.renderMode3D.value && properties.debugProperties.visualizeBeacon.value);
+            pointObject.SetActive(properties.debugProperties.visualize.value && properties.debugProperties.visualizeSourcePosition.value);
 
-        //    if(properties.audioProperties.isChanged())
-        //        audioManager.updateAudioSources();
+            Timer soundComputationTimer = new Timer();
+            totalSoundComputationTime.resume();
+            soundComputationTimer.start();
 
-        //    update();
-        //}
+            computeSound();
 
-        //public abstract void update();
+            soundComputationTimer.stop();
+            totalSoundComputationTime.pause();
 
-        //protected void updateModel(){
-        //    source.computeModel();
+            averageSoundComputationTime.addNewValue(soundComputationTimer.getTimeElapsed());
 
-        //    //foreach(DiffractionSource diff in source.allDiffractionSources){
-        //    //    debugger.drawPoint(diff.position, 1, 0.5f, ResourceManager.materialColorMagenta);
-        //    //    //debugger.drawLine(source.position, diff.position, 0.2f, 0.5f, ResourceManager.materialColorYellow);
-        //    //}
-        //    RenderingUtils.drawPoint(source.position, 1, 0.5f, ResourceManager.materialColorRed, pointObject);
-        //    RenderingUtils.drawCircle(source.position, source.range, 0.5f, 0.02f, ResourceManager.materialColorMagenta, rangeCircle);
-        //    beaconObject.transform.position = new Vector3(source.position.x, 0, source.position.y);
-        //}
+            if(properties.audioProperties.isChanged())
+                audioManager.updateAudioSources();
 
-        //private void computeSound(){
-        //    Vector2 listenerPosition;
-        //    if(manager.geometryProperties.renderMode3D.value) {
-        //        listenerPosition = new Vector2(listenerObject.transform.position.x, listenerObject.transform.position.z);
+            update();
+        }
 
-        //        if(properties.audioProperties.outputChannels.value == AudioManager.OutputChannels.stereo)
-        //            listenerDirection = new Vector2(listenerObject.transform.forward.x, listenerObject.transform.forward.z);
-        //    }else
-        //        listenerPosition = Utils.getMousePosition();
-            
-        //    source.soundModelMethod.computeSound(listenerPosition, source);
-        //}
+        public abstract void update();
 
-        //public void createBeaconObject(){
-        //    beaconObject = Instantiate(ResourceManager.beaconPrefab);
-        //    beaconObject.name = "Beacon";
-        //    beaconObject.transform.parent = transform;
-        //    beaconObject.transform.localScale = new Vector3(0.2f, 20, 0.2f);
-        //    beaconObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Color");
-        //}
+        protected void updateModel() {
+            source.computeModel();
 
-        //private void OnDestroy(){
-        //    if(manager != null)
-        //        manager.removeSoundSource(this);
-        //}
+            RenderingUtils.drawPoint(source.position, 1, 0.5f, ResourceManager.materialColorRed, pointObject);
+            RenderingUtils.drawCircle(source.position, source.range, 0.5f, 0.02f, ResourceManager.materialColorMagenta, rangeCircle);
+            beaconObject.transform.position = new Vector3(source.position.x, 0, source.position.y);
+        }
+
+        private void computeSound() {
+            Vector2 listenerPosition;
+            if(manager.geometryProperties.renderMode3D.value) {
+                listenerPosition = new Vector2(listenerObject.transform.position.x, listenerObject.transform.position.z);
+
+                if(properties.audioProperties.outputChannels.value == AudioManager.OutputChannels.stereo)
+                    listenerDirection = new Vector2(listenerObject.transform.forward.x, listenerObject.transform.forward.z);
+            } else
+                listenerPosition = Utils.getMousePosition();
+
+            source.soundModelMethod.computeSound(listenerPosition, source);
+        }
+
+        public void createBeaconObject() {
+            beaconObject = Instantiate(ResourceManager.beaconPrefab);
+            beaconObject.name = "Beacon";
+            beaconObject.transform.parent = transform;
+            beaconObject.transform.localScale = new Vector3(0.2f, 20, 0.2f);
+            beaconObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Color");
+        }
+
+        private void OnDestroy() {
+            if(manager != null)
+                manager.removeSoundSource(this);
+        }
     }
 }
