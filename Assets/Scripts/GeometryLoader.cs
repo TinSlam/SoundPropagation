@@ -32,14 +32,14 @@ namespace SoundPropagation{
         }
 
         private void loadFromFile(Manager manager){
-            //List<Vector2[]> vertices = MapLoader.loadMap(mapName);
+            List<Vector2[]> vertices = MapLoader.loadMap(fileName);
 
-            //manager.addGeometry(createGeometry(vertices));
+            manager.addGeometry(createGeometry(vertices, manager));
 
-            //foreach(float threshold in manager.geometryProperties.geometrySimplificationThresholds.value)
-            //    manager.addGeometry(createGeometry(simplifyObstacles(vertices, threshold)));
+            foreach(float threshold in manager.geometryProperties.geometrySimplificationThresholds.value)
+                manager.addGeometry(createGeometry(simplifyObstacles(vertices, threshold), manager));
 
-            //manager.setGeometry();
+            manager.setGeometry();
         }
 
         private void loadObstacles(Transform transform, List<ObstacleData> data){
