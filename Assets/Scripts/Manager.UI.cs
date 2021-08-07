@@ -37,7 +37,7 @@ namespace SoundPropagation{
 
             averageSoundComputationTime.text = "Average Sound Computation Time (ms): " + debugger.soundModel.averageSoundComputationTime.average * 1000;
             totalSoundComputationTime.text = "Total Sound Computation Time (s): " + debugger.soundModel.totalSoundComputationTime.timeElapsed;
-            averageModelComputationTime.text = "Average Model Computation Time (ms): " + debugger.soundModel.averageSoundComputationTime.average * 1000;
+            averageModelComputationTime.text = "Average Model Computation Time (ms): " + debugger.soundModel.averageModelComputationTime.average * 1000;
             totalModelComputationTime.text = "Total Model Computation Time (s): " + debugger.soundModel.totalModelComputationTime.timeElapsed;
             
             averageDiffractionComputationTime.text = "Average Diffraction Computation Time (ms): " + debugger.soundModel.averageDiffractionSoundComputationTime.average * 1000;

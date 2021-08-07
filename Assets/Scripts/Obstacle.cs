@@ -172,8 +172,8 @@ namespace SoundPropagation{
             renderer.positionCount = vertices.Length;
             renderer.loop = true;
 
-            renderer.startWidth = 0.1f;
-            renderer.endWidth = 0.1f;
+            renderer.startWidth = 0.2f;
+            renderer.endWidth = 0.2f;
 
             renderer.material = ResourceManager.materialColorGreen;
 

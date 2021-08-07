@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SoundPropagation{
     public abstract class SoundModel: MonoBehaviour{
-        public GameObject managerObject;
+        private GameObject managerObject;
         public GameObject propertiesObject;
 
         public PrimarySoundSource source;
@@ -34,6 +34,10 @@ namespace SoundPropagation{
         private float transitionTime = 0.5f;
         private float transitionInitialTime;
         private float tempVolume;
+
+        private void Awake(){
+            managerObject = FindObjectOfType<Manager>().gameObject;
+        }
 
         private void OnEnable() {
             transitioning = true;
@@ -128,9 +132,6 @@ namespace SoundPropagation{
 
         private void Update() {
             transition();
-
-            if(Input.GetKeyDown(KeyCode.K))
-                countVertices();
 
             rangeCircle.SetActive(properties.debugProperties.visualize.value && properties.debugProperties.visualizeRangeCircle.value);
             beaconObject.SetActive(properties.debugProperties.visualize.value && manager.geometryProperties.renderMode3D.value && properties.debugProperties.visualizeBeacon.value);

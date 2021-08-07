@@ -73,6 +73,9 @@ namespace SoundPropagation{
 
             camera2DControl();
 
+            if(Input.GetKeyDown(KeyCode.G))
+                manager.geometryProperties.renderMode3D.value = !manager.geometryProperties.renderMode3D.value;
+
             sourceSwitch();
 
             if(soundModel == null)
