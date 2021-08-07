@@ -73,12 +73,23 @@ namespace SoundPropagation{
 
             camera2DControl();
 
+            sourceSwitch();
+
             if(soundModel == null)
                 return;
 
             pollEvents();
 
             followMouse();
+        }
+
+        private void sourceSwitch(){
+            for(int i = 0; i < 9; i++)
+                if(Input.GetKeyDown(KeyCode.Alpha1 + i))
+                    if(i < manager.soundSources.Count){
+                        soundModel = manager.soundSources[i];
+                        return;
+                    }
         }
 
         private void followMouse(){
@@ -101,6 +112,21 @@ namespace SoundPropagation{
 
         private void pollEvents(){
             sourcePositionControl();
+
+            if(Input.GetKey(KeyCode.KeypadPlus))
+                soundModel.properties.modelProperties.amplitude.value += 1;
+
+            if(Input.GetKey(KeyCode.KeypadMinus))
+                soundModel.properties.modelProperties.amplitude.value = Mathf.Max(0, soundModel.properties.modelProperties.amplitude.value - 1);
+
+            if(Input.GetKeyDown(KeyCode.V))
+                soundModel.properties.debugProperties.visualize.value = !soundModel.properties.debugProperties.visualize.value;
+
+            if(Input.GetKeyDown(KeyCode.C))
+                soundModel.properties.modelProperties.diffraction.value = !soundModel.properties.modelProperties.diffraction.value;
+
+            if(Input.GetKeyDown(KeyCode.T))
+                soundModel.properties.modelProperties.transmission.value = !soundModel.properties.modelProperties.transmission.value;
         }
 
         private void sourcePositionControl(){

@@ -6,14 +6,14 @@ namespace SoundPropagation{
     public partial class Manager: MonoBehaviour{
         public Geometry.Properties geometryProperties;
         public Debugger.Properties debugProperties;
-        //public TestScenario.Properties testProperties;
 
         private GameObject camera2DObject;
         [HideInInspector] public GameObject fpsController;
-        public GameObject debugSoundModel;
 
         public Debugger debugger;
-        //private UI ui;
+
+        public GameObject uiObject;
+        public GameObject debugSoundSource;
 
         [HideInInspector] public List<SoundModel> soundSources = new List<SoundModel>();
 
@@ -21,9 +21,10 @@ namespace SoundPropagation{
             loadPrefabs();
             loadGeometry();
 
+            initializeUI();
+
             geometryProperties.initialize();
             debugProperties.initialize();
-            //testProperties.initialize();
 
             ResourceManager.initializeResources();
 
@@ -32,14 +33,9 @@ namespace SoundPropagation{
             initialize2D();
 
             updateGeometry();
-
-            //TestScenario.createScenarios(this);
         }
 
         private void loadPrefabs(){
-            GameObject uiObject = new GameObject("UI Prefab");
-            uiObject.transform.parent = transform.parent;
-
             fpsController = transform.parent.GetComponentInChildren<FirstPersonController>(true).gameObject;
         }
 
@@ -79,22 +75,21 @@ namespace SoundPropagation{
         }
 
         private void updateDebugModel(){
-            if(debugSoundModel == null){
+            if(debugSoundSource == null){
                 if(soundSources.Count != 0)
                     debugger.soundModel = soundSources[0];
             }else
-                debugger.soundModel = debugSoundModel.GetComponent<SoundModel>();
+                debugger.soundModel = debugSoundSource.GetComponent<SoundModel>();
             
             if(debugger.soundModel != null)
-                debugSoundModel = debugger.soundModel.gameObject;
+                debugSoundSource = debugger.soundModel.gameObject;
         }
 
         private void Update(){
             updateDebugModel();
 
             debugger.update();
-            //if(debugger.soundModel != null)
-            //    updateUI();
+            updateUI();
 
             if(!geometryProperties.isChanged())
                 return;
