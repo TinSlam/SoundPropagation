@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8627857425008511816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b59fabf7aeb5d704182feab6e417c228, type: 3}
+  m_Script: {fileID: 11500000, guid: abd7276bd06c11341984574efba467d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   modelProperties:
@@ -73,7 +73,7 @@ MonoBehaviour:
     reflection:
       value: 0
     reflectionRayCount:
-      value: 24
+      value: 36
     reflectionBounceLimit:
       value: 3
     reflectionMinimumRangeLimit:
@@ -90,9 +90,9 @@ MonoBehaviour:
     audioStartDelay:
       value: 0
     reflectionAudioPoolCount:
-      value: 4
+      value: 0
     reflectionMaximumAudioDelay:
-      value: 0.5
+      value: 0.2
   debugProperties:
     visualize:
       value: 1
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8627857425731933034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32abf67a2082fda418c1d76f3d7d181f, type: 3}
+  m_Script: {fileID: 11500000, guid: ec2c8f6c1a9872c488e1c902e128be5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   propertiesObject: {fileID: 8627857425008511816}

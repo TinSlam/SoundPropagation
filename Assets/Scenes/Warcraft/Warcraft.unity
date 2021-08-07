@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: modelProperties.amplitude.value
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 8627857425008511822, guid: d34ce6a84fac4fb4083ba499753127c3, type: 3}
+      propertyPath: audioProperties.reflectionMaximumAudioDelay.value
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8627857425731933034, guid: d34ce6a84fac4fb4083ba499753127c3, type: 3}
       propertyPath: m_Name
       value: SoundSource
